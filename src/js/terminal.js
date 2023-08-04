@@ -1,8 +1,43 @@
-import { setVolume } from "./util/speak.js";
-import { click } from "./util/sounds.js";
-import { on, off } from "./util/power.js";
-import { main, toggleFullscreen, login, dialer } from "./util/screens.js";
-import { type, parse } from "./util/io.js";
+// import { main, dialer } from "./util/screens.js";
+// import { type, parse } from "./util/io.js";
+
+// import { click } from "/utils/sounds.js";
+
+async function main() {
+  const module = await import(
+    `${import.meta.env.BASE_URL}utils/screens.js` /* @vite-ignore */
+  );
+  if (module) {
+    module.main();
+  }
+}
+
+async function dialer() {
+  const module = await import(
+    `${import.meta.env.BASE_URL}utils/screens.js` /* @vite-ignore */
+  );
+  if (module) {
+    module.dialer();
+  }
+}
+
+async function type(...args) {
+  const module = await import(
+    `${import.meta.env.BASE_URL}utils/io.js` /* @vite-ignore */
+  );
+  if (module) {
+    module.type(args);
+  }
+}
+
+async function parse(...args) {
+  const module = await import(
+    `${import.meta.env.BASE_URL}utils/io.js` /* @vite-ignore */
+  );
+  if (module) {
+    module.parse(args);
+  }
+}
 
 // Check if query param is set and load that command
 async function onload() {
@@ -12,9 +47,6 @@ async function onload() {
 
   if (command) {
     console.log("onload, command");
-    //const { power } = await import("./util/power.js");
-    //const { parse } = await import("./util/io.js");
-    //power();
     await type("> " + command, { initialWait: 3000, finalWait: 1500 });
     await parse(command);
 
@@ -27,26 +59,6 @@ async function onload() {
     //boot();
     dialer();
     //login();
-  }
-}
-
-// Change the command passed to the parse function in order to directly load that command.
-// Then visit /debug.html which calls this function in <body> onLoad().
-// async function debug() {
-//   const { power } = await import("./util/power.js");
-//   const { main } = await import("./util/screens.js");
-//   const { parse } = await import("./util/io.js");
-//   power();
-//   main();
-//   parse("fallout");
-// }
-
-function togglePower() {
-  let isOff = document.getElementById("crt").classList.contains("off");
-  if (isOff) {
-    on();
-  } else {
-    off();
   }
 }
 
@@ -64,6 +76,15 @@ function fly(event) {
   event.target.classList.toggle("fly");
 }
 
+async function click() {
+  const module = await import(
+    `${import.meta.env.BASE_URL}utils/sounds.js` /* @vite-ignore */
+  );
+  if (module) {
+    module.click();
+  }
+}
+
 function theme(event) {
   click();
   let theme = event.target.dataset.theme;
@@ -75,22 +96,10 @@ function theme(event) {
   handleClick();
 }
 
-function fullscreen(event) {
-  toggleFullscreen();
-  event.target.blur();
-}
-
 function globalListener({ keyCode }) {
   const element = document.querySelector("#input");
   if (!element) return;
   element.focus();
-  if (keyCode === 122) {
-    // F11
-    toggleFullscreen();
-  } else if (keyCode === 27) {
-    // ESC
-    toggleFullscreen(false);
-  }
 }
 
 document.addEventListener("keydown", globalListener);
@@ -104,11 +113,8 @@ document.addEventListener("click", () => {
 
 // Define some stuff on the window so we can use it directly from the HTML
 Object.assign(window, {
-  // debug,
   onload,
-  togglePower,
   theme,
   fly,
   handleClick,
-  fullscreen,
 });

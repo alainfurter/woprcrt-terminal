@@ -1,6 +1,6 @@
-import { prompt, type } from "../../src/js/util/io";
-import alert from "../../src/js/util/alert.js";
-import say from "../../src/js/util/speak";
+import { prompt, type } from "/utils/io.js";
+import alert from "/utils/alert.js";
+import say from "/utils/speak.js";
 
 const output = [
   " ",

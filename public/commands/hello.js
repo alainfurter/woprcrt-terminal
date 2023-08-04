@@ -1,5 +1,4 @@
-//import say from "../../src/js/util/speak";
-import say from "./speak.js";
+import say from "/utils/speak.js";
 
 const output = [" ", "GREETINGS PROFESSOR FURTER.", " "];
 

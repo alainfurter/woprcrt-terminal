@@ -1,7 +1,6 @@
-import { typeSound } from "./sounds.js";
-import say from "./speak.js";
-import pause from "./pause.js";
-import { loadTemplates } from "./screens.js";
+import { typeSound } from "/utils/sounds.js";
+import pause from "/utils/pause.js";
+import say from "/utils/speak.js";
 
 // Command history
 let prev = getHistory();
@@ -286,9 +285,7 @@ async function parse(input) {
 
   // Try to import the command function
   try {
-    module = await import(
-      `${import.meta.env.BASE_URL}commands/${command}.js` /* @vite-ignore */
-    );
+    module = await import(`/commands/${command}.js` /* @vite-ignore */);
   } catch (e) {
     console.error(e);
     // Kinda abusing TypeError to check if the import failed

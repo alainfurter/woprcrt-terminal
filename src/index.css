@@ -44,6 +44,7 @@ html {
   width: 100%;
   /* background: url("/assets/images/background.jpg") no-repeat center center fixed; */
   background: url("/assets/images/background.jpg");
+  /* background-color: transparent; */
   /* -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover; */
@@ -63,6 +64,7 @@ body {
 
   font-size: 14px;
   background-color: var(--background-color);
+  /* background-color: transparent; */
   font-size: 14px;
   font-family: sans-serif;
   color: var(--color);

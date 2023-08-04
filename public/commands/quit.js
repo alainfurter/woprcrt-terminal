@@ -1,11 +1,25 @@
-import { off } from "../../src/js/util/power";
-import say from "../../src/js/util/speak";
+import say, { stopSpeaking } from "/utils/speak.js";
+import { woprsound } from "/utils/screens.js";
 
 const output = [" ", "GOODBYE PROFESSOR FURTER.", " "];
 
+function togglePower() {
+  let isOff = document.getElementById("crt").classList.contains("off");
+  if (isOff) {
+    document.getElementById("on-off-container").classList.toggle("on", true);
+    document.getElementById("on-off-container").classList.toggle("off", false);
+  } else {
+    document.getElementById("on-off-container").classList.toggle("on", false);
+    document.getElementById("on-off-container").classList.toggle("off", true);
+  }
+}
+
 export default () => {
-  say("GOODBYE PROFESSOR FURTER.");
-  return off();
+  say("GOODBYE");
+  stopSpeaking();
+  const event = new Event("stopwoprsound");
+  woprsound.dispatchEvent(event);
+  return togglePower();
 };
 
 export { output };

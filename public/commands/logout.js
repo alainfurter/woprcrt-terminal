@@ -1,4 +1,4 @@
-import { login } from "../../src/js/util/screens.js";
+import { login } from "/utils/screens.js";
 
 const output = [" ", "Logging out...", " "];
 

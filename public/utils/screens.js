@@ -1,8 +1,7 @@
-import clear from "./clear.js";
-import { parse, type, prompt, input } from "./io.js";
-import pause from "./pause.js";
-import alert from "./alert.js";
-import say from "./speak.js";
+import clear from "/commands/clear.js";
+import { parse, type, prompt, input } from "/utils/io.js";
+import pause from "/utils/pause.js";
+import alert from "/utils/alert.js";
 
 var woprsound = new Audio("/assets/sounds/wopr-humming.mp3");
 woprsound.loop = true;
@@ -39,17 +38,6 @@ async function login() {
       "||45-45-F6-3456    NOPR STATUS: TRAK OFF    PRON ACTIVE",
       "#45:45 || WER: 45/29  XCOMP: 432  YCOMP: 349 ZCOMP: 343",
       "###############################TRON:🀫",
-      // " ",
-      // "@@@  @@@  @@@     @@@@@@     @@@@@@@@@@     @@@@@@@@@@",
-      // "@@@  @@@  @@@    @@@@@@@@    @@@@@@@@@@@    @@@@@@@@@@@",
-      // "@@!  @@!  @@!    @@@  @@!    @@!     @@!    @@!     @@!",
-      // "!@!  !@!  !@!    !@!  @!@    !@!     !@!    !@!     !@!",
-      // "@!!  !!@  @!@    @!@  !@!    @!! !!@ @!@    @!! !!@ @!@ ",
-      // "!@!  !!!  !@!    !@!  !!!    !@!            !@!   !@! ",
-      // "!!:  !!:  !!:    !!:  !!!    !!:            !!:     !!: ",
-      // ":!:  :!:  :!:    :!:  !:!    :!:            :!:     :!: ",
-      // " :::: :: :::     ::::::::    :::            :::      ::",
-      // "  :::  :::        ::::::      :              :        :",
       " ",
       "",
       " ",
@@ -57,11 +45,10 @@ async function login() {
     { wait: false, initialWait: false, finalWait: false, speak: false }
   );
 
-  let logon = await prompt("LOGON: ");
+  let logon = await prompt("LOGON: ", { pw: true });
 
   if (logon === "joshua") {
     await pause();
-    //say("AUTHENTICATION SUCCESSFUL");
     await alert("LOGON SUCCESSFUL");
     clear();
     //return main();

@@ -1,6 +1,4 @@
-// import say from "./speak";
-//const say = await import("./speak.js");
-import say from "./speak.js";
+import say from "/utils/speak.js";
 
 const output = [" ", "THERE IS NO SPOON.", " "];
 
