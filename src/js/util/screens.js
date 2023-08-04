@@ -4,7 +4,7 @@ import pause from "./pause.js";
 import alert from "./alert.js";
 import say from "./speak.js";
 
-var woprsound = new Audio("assets/sounds/wopr-humming.mp3");
+var woprsound = new Audio("/assets/sounds/wopr-humming.mp3");
 woprsound.loop = true;
 woprsound.addEventListener(
   "stopwoprsound",
@@ -143,9 +143,9 @@ async function dialer() {
   await waitforuserkeypressed();
   console.log("dial...");
 
-  var dialupsound = new Audio("assets/sounds/dtmf-wopr.wav");
+  var dialupsound = new Audio("/assets/sounds/dtmf-wopr.wav");
   dialupsound.playbackRate = 2.0;
-  var modemupsound = new Audio("assets/sounds/modem.wav");
+  var modemupsound = new Audio("/assets/sounds/modem.wav");
   modemupsound.playbackRate = 3.0;
 
   await alert("DIALING (311) 399-2364...");
