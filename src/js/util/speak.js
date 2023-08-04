@@ -28,6 +28,7 @@ function say(text, pitch = 0.6, rate = 0.6) {
   const voices = setSpeech();
   voices.then((voices) => {
     let speech = new SpeechSynthesisUtterance(spokenText);
+    console.log(voices);
     console.log("voice: ", voices[140]);
     speech.voice = voices[140];
     speech.pitch = pitch;
