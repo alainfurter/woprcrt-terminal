@@ -1,8 +1,8 @@
 import { setVolume } from "./util/speak.js";
 import { click } from "./util/sounds.js";
 import { on, off } from "./util/power.js";
-import { boot, toggleFullscreen } from "./util/screens.js";
-import { type } from "./util/io.js";
+import { boot, main, toggleFullscreen, login, dialer } from "./util/screens.js";
+import { type, parse } from "./util/io.js";
 
 // Check if query param is set and load that command
 async function onload() {
@@ -13,17 +13,17 @@ async function onload() {
   if (command) {
     console.log("onload, command");
     //const { power } = await import("./util/power.js");
-    const { parse } = await import("./util/io.js");
+    //const { parse } = await import("./util/io.js");
     //power();
     await type("> " + command, { initialWait: 3000, finalWait: 1500 });
     await parse(command);
 
-    const { main } = await import("./util/screens.js");
+    //const { main } = await import("./util/screens.js");
     main();
     //boot();
   } else {
     console.log("onload no command");
-    const { boot, login, dialer } = await import("./util/screens.js");
+    //const { boot, login, dialer } = await import("./util/screens.js");
     //boot();
     dialer();
     //login();
@@ -32,14 +32,14 @@ async function onload() {
 
 // Change the command passed to the parse function in order to directly load that command.
 // Then visit /debug.html which calls this function in <body> onLoad().
-async function debug() {
-  const { power } = await import("./util/power.js");
-  const { main } = await import("./util/screens.js");
-  const { parse } = await import("./util/io.js");
-  power();
-  main();
-  parse("fallout");
-}
+// async function debug() {
+//   const { power } = await import("./util/power.js");
+//   const { main } = await import("./util/screens.js");
+//   const { parse } = await import("./util/io.js");
+//   power();
+//   main();
+//   parse("fallout");
+// }
 
 function togglePower() {
   let isOff = document.getElementById("crt").classList.contains("off");
@@ -104,7 +104,7 @@ document.addEventListener("click", () => {
 
 // Define some stuff on the window so we can use it directly from the HTML
 Object.assign(window, {
-  debug,
+  // debug,
   onload,
   togglePower,
   theme,
