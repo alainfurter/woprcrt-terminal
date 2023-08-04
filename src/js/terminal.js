@@ -1,7 +1,7 @@
 import { setVolume } from "./util/speak.js";
 import { click } from "./util/sounds.js";
 import { on, off } from "./util/power.js";
-import { boot, main, toggleFullscreen, login, dialer } from "./util/screens.js";
+import { main, toggleFullscreen, login, dialer } from "./util/screens.js";
 import { type, parse } from "./util/io.js";
 
 // Check if query param is set and load that command

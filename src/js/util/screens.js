@@ -16,33 +16,6 @@ woprsound.addEventListener(
   false
 );
 
-/** Boot screen */
-async function boot() {
-  console.log("Boot");
-  clear();
-  await type(
-    [
-      "Welcome to ECMA industries(TM) terminal",
-      " ",
-      "> SET TERMINAL/BOOT",
-      "Loading........................",
-      "Please wait........",
-      "..........",
-      "...",
-      ".",
-      "OK.",
-      " ",
-      "> SET TERMINAL/LOGON",
-      "USER AUTHENTICATION CHECK",
-    ],
-    { wait: 20 }
-  );
-
-  //await pause();
-  //return login();
-  return dialer();
-}
-
 /** Login screen */
 async function login() {
   console.log("Login");
@@ -89,7 +62,7 @@ async function login() {
   if (logon === "joshua") {
     await pause();
     //say("AUTHENTICATION SUCCESSFUL");
-    await alert("AUTHENTICATION SUCCESSFUL");
+    await alert("LOGON SUCCESSFUL");
     clear();
     //return main();
     return games();
@@ -148,7 +121,7 @@ async function dialer() {
   var modemupsound = new Audio("/assets/sounds/modem.wav");
   modemupsound.playbackRate = 3.0;
 
-  await alert("DIALING (311) 399-2364...");
+  await alert("DIALING (311) 399-2364");
 
   dialupsound.play();
   dialupsound.onended = function () {
@@ -250,7 +223,6 @@ function div(...args) {
 }
 
 export {
-  boot,
   login,
   main,
   games,

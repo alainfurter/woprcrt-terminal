@@ -1,5 +1,5 @@
 import { click } from "./sounds.js";
-import { boot } from "./screens.js";
+//import { boot } from "./screens.js";
 import { stopSpeaking } from "./speak.js";
 import { woprsound } from "./screens.js";
 
@@ -7,7 +7,7 @@ import { woprsound } from "./screens.js";
 async function on() {
   click();
   await power();
-  boot();
+  //boot();
 }
 
 /** Turn off the terminal */
