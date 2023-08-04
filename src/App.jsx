@@ -5,6 +5,9 @@ const App = () => {
   return (
     <>
       <CRT />
+      <footer>
+        <p>War Operation Plan Response (WOPR)</p>
+      </footer>
     </>
   )
 }
