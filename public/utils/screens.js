@@ -2,6 +2,8 @@ import clear from "/commands/clear.js";
 import { parse, type, prompt, input } from "/utils/io.js";
 import pause from "/utils/pause.js";
 import alert from "/utils/alert.js";
+import say from "/utils/speak.js";
+import selectgame, { output } from "/commands/games.js";
 
 var woprsound = new Audio("/assets/sounds/wopr-humming.mp3");
 woprsound.loop = true;
@@ -124,15 +126,26 @@ async function dialer() {
 async function games() {
   console.log("Games");
   clear();
-  await type(
-    ["GREETINGS PROFESSOR FURTER.", " ", "SHALL WE PLAY A GAME?", " "],
-    { speak: true }
-  );
-  return main();
+  SyntaxError();
+
+  await type(["GREETINGS PROFESSOR FURTER.", " "], { speak: true });
+  say("SHALL WE PLAY A GAME?");
+  let answer = await prompt("SHALL WE PLAY A GAME?");
+  if (answer === "y" || answer === "yes") {
+    console.log("select game");
+    await type(output);
+    await selectgame();
+    await type(["TYPE 'HELP' FOR A LIST OF AVAILABLE COMMANDS.", " "]);
+    return main();
+  } else {
+    await type([" ", "TYPE 'HELP' FOR A LIST OF AVAILABLE COMMANDS.", " "]);
+    return main();
+  }
 }
 
 /** Main input terminal, recursively calls itself */
 async function main() {
+  // type(" ", { wait: 0, initialWait: 0, finalWait: 0, stopBlinking: true });
   let command = await input();
   try {
     await parse(command);

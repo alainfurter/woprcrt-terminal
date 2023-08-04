@@ -16,6 +16,12 @@ const selectgame = async () => {
   console.log("Select game");
   say("WHICH GAME DO YOU WANT TO PLAY?");
   let game = await prompt("WHICH GAME DO YOU WANT TO PLAY (1-4) ?");
+  await type(" ", {
+    wait: 0,
+    initialWait: 0,
+    finalWait: 0,
+    stopBlinking: true,
+  });
   if (game === "1") {
     console.log("TIC-TAC-TOE");
     await alert("The TIC-TAC-TOE game is not implemented yet");
@@ -30,8 +36,8 @@ const selectgame = async () => {
     await alert("The GLOBAL THERMONUCLEAR WAR game is not implemented yet");
   } else {
     console.log("NO SUCH GAME");
-    await type([" ", "THERE IS NO SUCH GAME", " "]);
-    say("THERE IS NO SUCH GAME");
+    await type(["THERE IS NO SUCH GAME", " "], { stopBlinking: true });
+    await say("THERE IS NO SUCH GAME");
   }
 };
 
