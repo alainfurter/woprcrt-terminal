@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap");
+
+@font-face {
+  font-family: "WOPR";
+  src: url("/assets/fonts/wopr-tweaked.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+}
+
+:root {
+  --background-color: #000;
+  --color: #1bfbfb;
+  --base-unit: 1em;
+  --font-size: 18px;
+  --chassis-background: #313131;
+  --chassis-margin: calc(var(--base-unit) * 3);
+  --interlace-background: linear-gradient(#888 50%, #000 50%);
+  --interlace-size: 5px;
+  --envelope-background: rgba(#000, 0.25);
+  --envelope-margin: 2em;
+  --scanline-background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 250, 250, 1) 50%,
+    rgba(113, 255, 255, 1) 50%,
+    transparent 100%
+  );
+  --output-font-family: "monofont";
+  --output-color: #1bfbfb;
+  --output-text-shadow: rgba(12, 253, 253, 0.8);
+  --output-line-height: 1.25;
+  --gradient-bottom: #000a18;
+  --gradient-inner: #0060fb;
+}
+
+html {
+  height: 100vh;
+  width: 100%;
+  /* background: url("/assets/images/background.jpg") no-repeat center center fixed; */
+  background: url("/assets/images/background.jpg");
+  /* -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover; */
+  background-size: cover;
+
+  /* font-family: "VT323"; */
+  font-family: "WOPR";
+}
+
+body {
+  height: 100vh;
+  /* width: 100%; */
+
+  min-width: 880px; /* Suppose you want minimum width of 1000px */
+  width: auto !important; /* Firefox will set width as auto */
+  width: 880px; /* As IE6 ignores !important it will set width as 1000px; */
+
+  font-size: 14px;
+  background-color: var(--background-color);
+  font-size: 14px;
+  font-family: sans-serif;
+  color: var(--color);
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}

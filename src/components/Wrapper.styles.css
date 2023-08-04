@@ -1,0 +1,73 @@
+#wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 30;
+  transform-origin: 50% 50%;
+  transform: skewX(0.5deg);
+  animation: pulse 5s linear infinite;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    content: "";
+    z-index: 31;
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--gradient-bottom), transparent 50%) 0%,
+      color-mix(in srgb, var(--gradient-bottom), transparent 0%) 100%
+    );
+    pointer-events: none;
+  }
+
+  &::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    content: "";
+    z-index: 32;
+    opacity: 0.5;
+    /* background: radial-gradient(
+        ellipse at center,
+        rgba(var(--gradient-inner), 1) 0%,
+        rgba(var(--gradient-inner), 0) 100%
+      ); */
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--gradient-inner), transparent 0%) 0%,
+      color-mix(in srgb, var(--gradient-inner), transparent 100%) 100%
+    );
+    pointer-events: none;
+    animation: glow 2s linear infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.005);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  50% {
+    transform: scale(1.2);
+  }
+}

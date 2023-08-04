@@ -1,0 +1,13 @@
+#interlace {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 21;
+  opacity: 0.25;
+  background: var(--interlace-background);
+  background-size: 100% var(--interlace-size);
+  background-repeat: repeat-y;
+}

@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap");
+
+@font-face {
+  font-family: "WOPR";
+  src: url("/assets/fonts/wopr-tweaked.ttf");
+}
+
+:root {
+  /* --color: #5bf870; */
+  --color: #71ffff;
+  --bg: #05321e;
+  --off: #050505;
+  --dark: #111;
+  --term: "> ";
+}
+
+.terminal {
+  /* font-family: "Share Tech Mono", monospace; */
+  font-family: "WOPR";
+  font-size: 16px;
+  position: relative;
+  height: 100%;
+  padding: 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-break: break-word;
+  text-transform: uppercase;
+  animation: textShadow 4s infinite;
+  overflow: hidden;
+}
+
+.terminal,
+.fullscreen {
+  color: var(--color);
+  text-shadow: 0 0 5px #c8c8c8;
+}
+
+::selection {
+  background: var(--color);
+  color: var(--bg);
+  text-shadow: none;
+}
+
+/*********** INPUT / OUTPUT *************/
+
+#prompt {
+  /* display: none; */
+}
+
+[contenteditable] {
+  caret-color: transparent; /** This hides the default browser caret */
+  outline: none;
+}
+
+#input {
+  position: relative;
+  display: block;
+  white-space: pre-wrap;
+}
+
+/* Inserts the > before terminal input */
+#input:before {
+  content: var(--term);
+}
+
+/* Puts a blinking square after the content as replacement for caret */
+#input[contenteditable="true"]:after,
+.typer.active:after {
+  content: "■";
+  animation: cursor 1s infinite;
+  animation-timing-function: step-end;
+  margin-left: 1px;
+  line-height: 1rem;
+}
+
+#input.password .char {
+  display: none;
+}
+
+#input.password:after {
+  color: var(--color);
+}
+
+#input.password:before {
+  color: var(--color);
+  content: var(--term) attr(data-pw);
+}
+
+.typer {
+  word-break: break-all;
+}
+
+/*********** RANDOM OTHER STUFF *************/
+
+.access-granted {
+  animation: flicker 2s infinite;
+  position: fixed;
+  text-align: center;
+  background: var(--bg);
+  border: 2px solid var(--color);
+  padding: 10px 30px;
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+/*********** ANIMATIONS *************/
+
+@keyframes cursor {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Flash the typed letter, fade opaque to transparent */
+@keyframes type {
+  from {
+    background-color: var(--color);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-200%, 0);
+  }
+}
+
+@keyframes textShadow {
+  0% {
+    text-shadow: 0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5),
+      -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  5% {
+    text-shadow: 2.7928974010788217px 0 1px rgba(0, 30, 255, 0.5),
+      -2.7928974010788217px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  10% {
+    text-shadow: 0.02956275843481219px 0 1px rgba(0, 30, 255, 0.5),
+      -0.02956275843481219px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  15% {
+    text-shadow: 0.40218538552878136px 0 1px rgba(0, 30, 255, 0.5),
+      -0.40218538552878136px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  20% {
+    text-shadow: 3.4794037899852017px 0 1px rgba(0, 30, 255, 0.5),
+      -3.4794037899852017px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  25% {
+    text-shadow: 1.6125630401149584px 0 1px rgba(0, 30, 255, 0.5),
+      -1.6125630401149584px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  30% {
+    text-shadow: 0.7015590085143956px 0 1px rgba(0, 30, 255, 0.5),
+      -0.7015590085143956px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  35% {
+    text-shadow: 3.896914047650351px 0 1px rgba(0, 30, 255, 0.5),
+      -3.896914047650351px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  40% {
+    text-shadow: 3.870905614848819px 0 1px rgba(0, 30, 255, 0.5),
+      -3.870905614848819px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  45% {
+    text-shadow: 2.231056963361899px 0 1px rgba(0, 30, 255, 0.5),
+      -2.231056963361899px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  50% {
+    text-shadow: 0.08084290417898504px 0 1px rgba(0, 30, 255, 0.5),
+      -0.08084290417898504px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  55% {
+    text-shadow: 2.3758461067427543px 0 1px rgba(0, 30, 255, 0.5),
+      -2.3758461067427543px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  60% {
+    text-shadow: 2.202193051050636px 0 1px rgba(0, 30, 255, 0.5),
+      -2.202193051050636px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  65% {
+    text-shadow: 2.8638780614874975px 0 1px rgba(0, 30, 255, 0.5),
+      -2.8638780614874975px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  70% {
+    text-shadow: 0.48874025155497314px 0 1px rgba(0, 30, 255, 0.5),
+      -0.48874025155497314px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  75% {
+    text-shadow: 1.8948491305757957px 0 1px rgba(0, 30, 255, 0.5),
+      -1.8948491305757957px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  80% {
+    text-shadow: 0.0833037308038857px 0 1px rgba(0, 30, 255, 0.5),
+      -0.0833037308038857px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  85% {
+    text-shadow: 0.09769827255241735px 0 1px rgba(0, 30, 255, 0.5),
+      -0.09769827255241735px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  90% {
+    text-shadow: 3.443339761481782px 0 1px rgba(0, 30, 255, 0.5),
+      -3.443339761481782px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  95% {
+    text-shadow: 2.1841838852799786px 0 1px rgba(0, 30, 255, 0.5),
+      -2.1841838852799786px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  100% {
+    text-shadow: 2.6208764473832513px 0 1px rgba(0, 30, 255, 0.5),
+      -2.6208764473832513px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+}
