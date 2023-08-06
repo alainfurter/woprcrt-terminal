@@ -8,11 +8,47 @@
 
 :root {
   /* --color: #5bf870; */
-  --color: #71ffff;
+  /* --color: #71ffff; */
+  --color:#5785b7
   --bg: #05321e;
   --off: #050505;
   --dark: #111;
-  --term: "> ";
+  --term: "/norad/home > ";
+}
+
+#terminal-container {
+  position: absolute;
+  left: var(--envelope-margin);
+  top: var(--envelope-margin);
+  right: var(--envelope-margin);
+  bottom: var(--envelope-margin);
+
+  z-index: 40;
+  border-radius: calc(var(--base-unit) / 2);
+  background: var(--envelope-background);
+  animation: skew 5s linear infinite;
+}
+
+@keyframes skew {
+  0% {
+    transform: skewX(0.5deg);
+  }
+
+  8% {
+    transform: skewX(1deg) scale(1.0001);
+  }
+
+  15% {
+    transform: skewX(0.6deg) skewY(-0.05deg);
+  }
+
+  30% {
+    transform: skewX(0.6deg);
+  }
+
+  100% {
+    transform: skewX(0.1deg);
+  }
 }
 
 .terminal {

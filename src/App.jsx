@@ -1,13 +1,16 @@
 import './App.css'
-import CRT from './components/CRT';
+import IMSAI from './components/IMSAI'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 const App = () => {  
   return (
     <>
-      <CRT />
-      <footer>
-        <p>War Operation Plan Response (WOPR)</p>
-      </footer>
+      <Header />
+      <div className="pc-container">
+          <IMSAI />
+      </div>
+      <Footer />
     </>
   )
 }

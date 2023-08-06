@@ -15,12 +15,14 @@
 
 :root {
   --background-color: #000;
-  --color: #1bfbfb;
+  /* --color: #1bfbfb; */
+  --color: #5e91c8;
   --base-unit: 1em;
   --font-size: 18px;
   --chassis-background: #313131;
   --chassis-margin: calc(var(--base-unit) * 3);
-  --interlace-background: linear-gradient(#888 50%, #000 50%);
+  /* --interlace-background: linear-gradient(#888 50%, #000 50%); */
+  --interlace-background: linear-gradient(#1b3446 50%, #070e14 50%);
   --interlace-size: 5px;
   --envelope-background: rgba(#000, 0.25);
   --envelope-margin: 2em;
@@ -35,20 +37,21 @@
   --output-color: #1bfbfb;
   --output-text-shadow: rgba(12, 253, 253, 0.8);
   --output-line-height: 1.25;
-  --gradient-bottom: #000a18;
-  --gradient-inner: #0060fb;
+  --gradient-bottom: #050b0f;
+  --gradient-middle: #0c1922;
+  --gradient-inner: #132634;
 }
 
 html {
   height: 100vh;
   width: 100%;
   /* background: url("/assets/images/background.jpg") no-repeat center center fixed; */
-  background: url("/assets/images/background.jpg");
+  /* background: url("/assets/images/background.jpg"); */
   /* background-color: transparent; */
   /* -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover; */
-  background-size: cover;
+  /* background-size: cover; */
 
   /* font-family: "VT323"; */
   font-family: "WOPR";
@@ -74,10 +77,10 @@ body {
   height: 100vh;
   width: 100%;
   /* text-align: center; */
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 h1 {

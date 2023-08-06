@@ -1,7 +1,7 @@
-import './Terminal.styles.css'
+import '../css/Terminal.styles.css'
 import '../js/terminal.js'
 
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 
 const Terminal = () => {
 
@@ -10,14 +10,11 @@ const Terminal = () => {
         onload();
       }, []);
 
-    // useEffect(()=>{
-    //     console.log('Terminal loading...');
-    //     loadTerminal();
-    // }, []);
-
     return (
-        <div className='terminal' id='terminal' >
-            {/* child components added in javascript */}
+        <div id="terminal-container" >
+            <div className='terminal' id='terminal' >
+                {/* child components added in javascript */}
+            </div>
         </div>
     );
 }
