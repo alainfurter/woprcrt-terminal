@@ -1,8 +1,6 @@
 import { typeSound } from "/utils/sounds.js";
 import pause from "/utils/pause.js";
 import say from "/utils/speak.js";
-import { sentences } from "../../src/js/sentences";
-//import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 // Command history
 let prev = getHistory();
