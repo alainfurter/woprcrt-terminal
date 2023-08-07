@@ -1,9 +1,11 @@
-import say from "/utils/speak.js";
+import { type } from "/utils/io.js";
 
-const output = [" ", "THERE IS NO SPOON.", " "];
+const output = [" ", "HERE IS NO SPOON.", " "];
 
-export default () => {
-  return say("THERE IS NO SPOON.");
+const processOutput = async () => {
+  await type(output, { speak: true });
 };
 
-export { output };
+export default () => {
+  return processOutput();
+};

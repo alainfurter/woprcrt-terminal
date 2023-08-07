@@ -1,3 +1,4 @@
+import { type } from "/utils/io.js";
 import say, { stopSpeaking } from "/utils/speak.js";
 import { woprsound } from "/utils/screens.js";
 
@@ -14,12 +15,17 @@ function togglePower() {
   }
 }
 
+const processOutput = async () => {
+  await type(output, { speak: true });
+};
+
 export default () => {
-  say("GOODBYE");
+  //say("GOODBYE");
+  processOutput();
   stopSpeaking();
   const event = new Event("stopwoprsound");
   woprsound.dispatchEvent(event);
   return togglePower();
 };
 
-export { output };
+//export { output };

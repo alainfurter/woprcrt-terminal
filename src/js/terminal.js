@@ -42,6 +42,7 @@ async function parse(...args) {
 // Check if query param is set and load that command
 async function onload() {
   console.log("Onload");
+
   const urlParams = new URLSearchParams(window.location.search);
   const command = urlParams.get("command");
 

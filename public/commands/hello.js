@@ -1,9 +1,11 @@
-import say from "/utils/speak.js";
+import { type } from "/utils/io.js";
 
 const output = [" ", "GREETINGS PROFESSOR FURTER.", " "];
 
-export default () => {
-  return say("GREETINGS PROFESSOR FURTER.");
+const processOutput = async () => {
+  await type(output, { speak: true });
 };
 
-export { output };
+export default () => {
+  return processOutput();
+};

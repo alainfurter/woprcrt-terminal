@@ -1,12 +1,33 @@
 import { typeSound } from "/utils/sounds.js";
 import pause from "/utils/pause.js";
 import say from "/utils/speak.js";
+import { sentences } from "../../src/js/sentences";
+//import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 // Command history
 let prev = getHistory();
 let historyIndex = -1;
 let tmp = "";
 let interval;
+
+function countWords(str) {
+  const arr = str.split(" ");
+  return arr.filter((word) => word !== "").length;
+}
+
+async function isUrlFound(url) {
+  try {
+    const response = await fetch(url, {
+      method: "HEAD",
+      cache: "no-cache",
+    });
+    return response.status === 200;
+  } catch (error) {
+    // console.log(error);
+    const mute = error;
+    return false;
+  }
+}
 
 function getHistory() {
   let storage = localStorage.getItem("commandHistory");
@@ -81,6 +102,7 @@ async function type(
   container = document.querySelector(".terminal")
 ) {
   return new Promise(async (resolve) => {
+    //console.log("Type");
     if (interval) {
       clearInterval(interval);
       interval = null;
@@ -160,13 +182,14 @@ async function type(
 }
 
 function isPrintable(keycode) {
+  //console.log("Keycode: ", keycode);
   return (
     (keycode > 47 && keycode < 58) || // number keys
     keycode === 32 || // spacebar & return key(s) (if you want to allow carriage returns)
-    (keycode > 64 && keycode < 91) || // letter keys
-    (keycode > 95 && keycode < 112) || // numpad keys
-    (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
-    (keycode > 218 && keycode < 223)
+    (keycode > 64 && keycode < 91) // letter keys
+    // (keycode > 95 && keycode < 112) // numpad keys
+    // || (keycode > 185 && keycode < 193) // ;=,-./` (in order)
+    // || (keycode > 218 && keycode < 223)
   );
 }
 
@@ -184,9 +207,20 @@ function moveCaretToEnd(el) {
 
 /** Shows an input field, returns a resolved promise with the typed text on <enter> */
 async function input(pw) {
+  //console.log("Input begin");
   return new Promise((resolve) => {
     // This handles all user input
+    //console.log("Input continue");
     const onKeyDown = (event) => {
+      //console.log("Key down", event.keyCode);
+      if (event.keyCode !== 13 && event.keyCode !== 8) {
+        if (!isPrintable(event.keyCode)) {
+          event.preventDefault();
+          //console.log("Not printable");
+          return;
+        }
+      }
+
       typeSound();
       // ENTER
       if (event.keyCode === 13) {
@@ -221,6 +255,7 @@ async function input(pw) {
       }
       // Check if character can be shown as output (skip if CTRL is pressed)
       else if (isPrintable(event.keyCode) && !event.ctrlKey) {
+        //console.log("IsPrintable: ", isPrintable(event.keyCode));
         event.preventDefault();
         // Wrap the character in a span
         let span = document.createElement("span");
@@ -237,14 +272,17 @@ async function input(pw) {
         // which will be shown using CSS
         if (pw) {
           let length = event.target.textContent.length;
-          event.target.setAttribute(
+          -event.target.setAttribute(
             "data-pw",
             Array(length).fill("*").join("")
           );
         }
         moveCaretToEnd(event.target);
+      } else {
+        //console.log("Not printable");
       }
     };
+    //console.log("Test");
 
     // Add input to terminal
     let terminal = document.querySelector(".terminal");
@@ -262,6 +300,7 @@ async function input(pw) {
 
 // Processes the user input and executes a command
 async function parse(input) {
+  console.log("Parse");
   input = cleanInput(input);
 
   if (!input) {
@@ -269,59 +308,105 @@ async function parse(input) {
   }
   // Only allow words, separated by space
   let matches = String(input).match(/^(\w+)(?:\s((?:\w+(?:\s\w+)*)))?$/);
-
-  if (!matches) {
-    throw new Error("Invalid command");
-  }
   let command = matches[1];
   let args = matches[2];
 
-  let naughty = ["fuck", "shit", "die", "ass", "cunt"];
+  if (!matches) {
+    //throw new Error("INVALID COMMAND");fuck
+    command = "__invalid";
+  }
+
+  let naughty = ["fuck", "shit", "die", "ass", "cunt", "asshole", "idiot"];
   if (naughty.some((word) => command.includes(word))) {
-    throw new Error("Please don't use that language");
+    command = "__language";
   }
 
-  let module;
+  console.log("Matches: ", matches[0]);
+  let isValidCommand = await isUrlFound(`/commands/${command}.js`);
+  console.log("Command valid: ", isValidCommand);
+  if (!isValidCommand && countWords(matches[0]) < 3) {
+    command = "__invalid";
+    isValidCommand = true;
+  }
 
-  // Try to import the command function
-  try {
-    module = await import(`/commands/${command}.js` /* @vite-ignore */);
-  } catch (e) {
-    console.error(e);
-    // Kinda abusing TypeError to check if the import failed
-    if (e instanceof TypeError) {
-      return await type("Unknown command");
+  if (isValidCommand) {
+    let module;
+    // Try to import the command function
+    try {
+      module = await import(`/commands/${command}.js`);
+    } catch (e) {
+      console.error(e);
+      // Kinda abusing TypeError to check if the import failed
+      if (e instanceof TypeError) {
+        return await type("UNKNOWN COMMAND");
+      }
+      // E.g. syntax error while executing the command
+      else {
+        return await type("Error while executing command");
+      }
     }
-    // E.g. syntax error while executing the command
-    else {
-      return await type("Error while executing command");
+
+    if (module && module.stylesheet) {
+      addStylesheet(module.stylesheet);
     }
-  }
+    // Try to import and parse any HTML templates that the command module exports
+    if (module && module.template) {
+      await loadTemplates(`../templates/${module.template}.html`);
+    }
 
-  if (module && module.stylesheet) {
-    addStylesheet(module.stylesheet);
-  }
-  // Try to import and parse any HTML templates that the command module exports
-  if (module && module.template) {
-    await loadTemplates(`../templates/${module.template}.html`);
-  }
+    // Show any output if the command exports any
+    if (module && module.output) {
+      await type(module.output);
+    }
 
-  // Show any output if the command exports any
-  if (module && module.output) {
-    await type(module.output);
-  }
+    await pause();
 
-  await pause();
+    // Execute the command (default export)
+    if (module.default) {
+      await module.default(args);
+    }
+  } else {
+    if (countWords(matches[0]) >= 3) {
+      console.log("Input has 3 or more words");
+      let module;
+      // Try to import the command function
+      try {
+        module = await import("/commands/__sentences.js");
+      } catch (e) {
+        console.error(e);
+        // Kinda abusing TypeError to check if the import failed
+        if (e instanceof TypeError) {
+          return await type("UNKNOWN COMMAND");
+        }
+        // E.g. syntax error while executing the command
+        else {
+          return await type("Error while executing command");
+        }
+      }
+      // Show any output if the command exports any
+      if (module && module.output) {
+        await type(module.output);
+      }
 
-  // Execute the command (default export)
-  if (module.default) {
-    await module.default(args);
+      await pause();
+
+      // Execute the command (default export)
+      if (module.default) {
+        await module.default(matches[0]);
+      }
+    }
   }
   return;
 }
 
 function cleanInput(input) {
-  return input.toLowerCase().trim();
+  const input_lowercase = input.toLowerCase().trim();
+  const input_wo_extra_spaces = input_lowercase.replace(/[\n\r\s\t]+/g, " ");
+  //console.log("No extra spaces: ", input_wo_extra_spaces);
+  const cleaned_input = input_wo_extra_spaces.replace(/[^a-zA-Z0-9\-_\s]/g, "");
+  //const cleaned_input = input_lowercase.replace(/^[-\w]+$/, " ");
+  //console.log("Cleaned: ", cleaned_input);
+  return cleaned_input.trim();
 }
 
 function scroll(el = document.querySelector(".terminal")) {
