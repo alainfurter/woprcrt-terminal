@@ -1,7 +1,38 @@
-// import { main, dialer } from "./util/screens.js";
-// import { type, parse } from "./util/io.js";
+async function dialer() {
+  const module = await import(
+    `${import.meta.env.BASE_URL}utils/screens.js` /* @vite-ignore */
+  );
+  if (module) {
+    module.dialer();
+  }
+}
 
-// import { click } from "/utils/sounds.js";
+async function login() {
+  const module = await import(
+    `${import.meta.env.BASE_URL}utils/screens.js` /* @vite-ignore */
+  );
+  if (module) {
+    module.login();
+  }
+}
+
+async function games() {
+  const module = await import(
+    `${import.meta.env.BASE_URL}utils/screens.js` /* @vite-ignore */
+  );
+  if (module) {
+    module.games();
+  }
+}
+
+async function main_with_info() {
+  const module = await import(
+    `${import.meta.env.BASE_URL}utils/screens.js` /* @vite-ignore */
+  );
+  if (module) {
+    module.main_with_info();
+  }
+}
 
 async function main() {
   const module = await import(
@@ -9,15 +40,6 @@ async function main() {
   );
   if (module) {
     module.main();
-  }
-}
-
-async function dialer() {
-  const module = await import(
-    `${import.meta.env.BASE_URL}utils/screens.js` /* @vite-ignore */
-  );
-  if (module) {
-    module.dialer();
   }
 }
 
@@ -40,26 +62,19 @@ async function parse(...args) {
 }
 
 // Check if query param is set and load that command
-async function onload() {
-  console.log("Onload");
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const command = urlParams.get("command");
-
-  if (command) {
-    console.log("onload, command");
-    await type("> " + command, { initialWait: 3000, finalWait: 1500 });
-    await parse(command);
-
-    //const { main } = await import("./util/screens.js");
-    main();
-    //boot();
-  } else {
-    console.log("onload no command");
-    //const { boot, login, dialer } = await import("./util/screens.js");
-    //boot();
+async function loadingTerminal() {
+  const screenStatus = localStorage.getItem("screenStatus");
+  console.log("loadingTerminal. screenStatus: ", screenStatus);
+  if (screenStatus === "dialer") {
     dialer();
-    //login();
+  } else if (screenStatus === "login") {
+    login();
+  } else if (screenStatus === "games") {
+    games();
+  } else if (screenStatus === "main") {
+    main_with_info();
+  } else {
+    dialer();
   }
 }
 
@@ -112,10 +127,12 @@ document.addEventListener("click", () => {
   }
 });
 
-// Define some stuff on the window so we can use it directly from the HTML
-Object.assign(window, {
-  onload,
-  theme,
-  fly,
-  handleClick,
-});
+// // Define some stuff on the window so we can use it directly from the HTML
+// Object.assign(window, {
+//   loadingTerminal,
+//   theme,
+//   fly,
+//   handleClick,
+// });
+
+export { loadingTerminal };

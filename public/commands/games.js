@@ -33,7 +33,9 @@ const selectgame = async () => {
     await alert("The SUDOKU game is not implemented yet");
   } else if (game === "4") {
     console.log("GLOBAL THERMONUCLEAR WAR");
-    await alert("The GLOBAL THERMONUCLEAR WAR game is not implemented yet");
+    //await alert("The GLOBAL THERMONUCLEAR WAR game is not implemented yet");
+    const event = new CustomEvent("loadgame", { detail: "gtw" });
+    window.dispatchEvent(event);
   } else {
     console.log("NO SUCH GAME");
     await type(["THERE IS NO SUCH GAME", " "], { stopBlinking: true });

@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap");
+
+@font-face {
+  font-family: "WOPR";
+  src: url("/assets/fonts/wopr-tweaked.ttf");
+}
+
+:root {
+  --color:#5785b7
+  --bg: #05321e;
+  --off: #050505;
+  --dark: #111;
+}
+
+#global-thermonuclear-war-container {
+  position: absolute;
+  left: var(--envelope-margin);
+  top: var(--envelope-margin);
+  right: var(--envelope-margin);
+  bottom: var(--envelope-margin);
+
+  z-index: 40;
+  border-radius: calc(var(--base-unit) / 2);
+  background: var(--envelope-background);
+  animation: skew 5s linear infinite;
+  /* text-align: center; */
+}
+
+#global-thermonuclear-war {
+    /* font-family: "Share Tech Mono", monospace; */
+    font-family: "WOPR";
+    font-size: 16px;
+    position: relative;
+    height: 100%;
+    padding: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-break: break-word;
+    text-transform: uppercase;
+    animation: textShadow 4s infinite;
+    overflow: hidden;
+}
+
+#global-thermonuclear-war h1 {
+    text-align: center;
+    font-size: 20px;
+}
+
+.world-map-container {
+    height: 200px;
+} 
+
+.country-names {
+    margin-top: 5px;
+    height: 20px;
+}
+
+.choose-side {
+    margin-top: 5px;
+    height: 55px;
+
+}
+
+#country-choice-label {
+    background-color: transparent;
+    /* border: black; */
+    width: 100px;
+    margin-left: 95px;
+}
+
+#country-choice {
+    height: 20px;
+    width: 10px;
+    line-height: 20px;
+    margin-left: 5px;
+
+    background-color: transparent;
+    border: none;
+    /* border: black; */
+    /* margin-left: 5px; */
+    text-align: right;
+    color: var(--color);
+    font-family: "WOPR";
+    font-size: 18px;
+    caret-color: transparent; /** This hides the default browser caret */
+    outline: none;
+    /* border: 1px solid red; */
+    padding-right: 0;
+    margin-right: 0;
+}
+
+#cursorspan {
+  margin-left: 0;
+  padding-left: 5px;
+  /* padding-top: 5px; */
+  /* border: 1px solid blue; */
+  visibility: hidden;
+} 
+
+/* Puts a blinking square after the content as replacement for caret */
+#cursorspan::before {
+  content: "■";
+  animation: cursor 1s infinite;
+  animation-timing-function: step-end;
+  margin-left: 0px;
+  line-height: 1rem;
+  padding-top: 15px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#war-hero {
+    margin-top: 25px;
+    height: 20px;
+    width: 100%;
+    text-align: center;
+    /* margin-left: 95px; */
+}
+
+.game-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+} 
+
+button {
+    height: 30px;
+    width: 180px !important;
+    color: var(--color);
+    border-color: var(--color);
+    border-style: dashed;
+    background-color: transparent;
+    padding: 4px 0px 0px 3px;
+    font-family: "WOPR";
+    font-size: 18px;
+    text-align: center;
+
+}
+
+  /*********** ANIMATIONS *************/
+
+@keyframes cursor {
+    0% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 0;
+    }
+    75% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

@@ -5,13 +5,23 @@ import { woprsound } from "/utils/screens.js";
 const output = [" ", "GOODBYE PROFESSOR FURTER.", " "];
 
 function togglePower() {
-  let isOff = document.getElementById("crt").classList.contains("off");
+  let isOff = document
+    .getElementById("screen-on-off-container")
+    .classList.contains("off");
   if (isOff) {
-    document.getElementById("on-off-container").classList.toggle("on", true);
-    document.getElementById("on-off-container").classList.toggle("off", false);
+    document
+      .getElementById("screen-on-off-container")
+      .classList.toggle("on", true);
+    document
+      .getElementById("screen-on-off-container")
+      .classList.toggle("off", false);
   } else {
-    document.getElementById("on-off-container").classList.toggle("on", false);
-    document.getElementById("on-off-container").classList.toggle("off", true);
+    document
+      .getElementById("screen-on-off-container")
+      .classList.toggle("on", false);
+    document
+      .getElementById("screen-on-off-container")
+      .classList.toggle("off", true);
   }
 }
 
@@ -20,8 +30,8 @@ const processOutput = async () => {
 };
 
 export default () => {
-  //say("GOODBYE");
-  processOutput();
+  say("GOODBYE");
+  //processOutput();
   stopSpeaking();
   const event = new Event("stopwoprsound");
   woprsound.dispatchEvent(event);

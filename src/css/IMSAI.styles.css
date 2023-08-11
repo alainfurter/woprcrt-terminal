@@ -7,3 +7,9 @@
   justify-content: center;
   align-items: center;
 }
+
+.imsai > p {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 50%;
+}

@@ -22,6 +22,10 @@ async function login() {
   console.log("Login");
   //await pause(2);
   clear();
+  localStorage.setItem("screenStatus", "login");
+
+  console.log("Play wopr sound");
+  woprsound.play();
   await type(
     [
       " ",
@@ -168,6 +172,8 @@ async function connecting() {
 async function dialer() {
   console.log("Dialer");
   clear();
+  localStorage.setItem("screenStatus", "dialer");
+
   await type(
     [
       " ",
@@ -228,8 +234,6 @@ async function dialer() {
     modemupsound.play();
     modemupsound.onended = async function () {
       await connecting();
-      console.log("Play wopr sound");
-      woprsound.play();
       return login();
     };
   };
@@ -239,6 +243,10 @@ async function dialer() {
 async function games() {
   console.log("Games");
   clear();
+  localStorage.setItem("screenStatus", "games");
+
+  console.log("Play wopr sound");
+  woprsound.play();
   // SyntaxError();
   await type(["GREETINGS PROFESSOR FURTER.", " "], { speak: true });
   say("SHALL WE PLAY A GAME?");
@@ -256,7 +264,45 @@ async function games() {
 }
 
 /** Main input terminal, recursively calls itself */
+async function main_with_info() {
+  localStorage.setItem("screenStatus", "main");
+
+  console.log("Play wopr sound");
+  woprsound.play();
+  await type(
+    [
+      " ",
+      "FURTER AI INDUSTRIES  1977",
+      "🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫",
+      " ",
+      "||45-45-F6-3456            NOPR STATUS: TRAK OFF        PRON ACTIVE",
+      "#45:45:45 ↑↑ WER:45/29/01 XCOMP:43239582 YCOMP:3492030D ZCOMP:343906834",
+
+      "🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫",
+      " ",
+      " ",
+      "TYPE 'HELP' FOR A LIST OF AVAILABLE COMMANDS.",
+      " ",
+      " ",
+    ],
+    { wait: false, initialWait: false, finalWait: false, speak: false }
+  );
+
+  let command = await input();
+  try {
+    await parse(command);
+  } catch (e) {
+    if (e.message) await type(e.message);
+  }
+  main();
+}
+
+/** Main input terminal, recursively calls itself */
 async function main() {
+  localStorage.setItem("screenStatus", "main");
+  console.log("Play wopr sound");
+  woprsound.play();
+
   // type(" ", { wait: 0, initialWait: 0, finalWait: 0, stopBlinking: true });
   let command = await input();
   try {
@@ -264,7 +310,6 @@ async function main() {
   } catch (e) {
     if (e.message) await type(e.message);
   }
-
   main();
 }
 
@@ -337,6 +382,7 @@ function div(...args) {
 export {
   login,
   main,
+  main_with_info,
   games,
   dialer,
   woprsound,

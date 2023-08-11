@@ -16,4 +16,6 @@ https://github.com/abs0/wargames
 https://github.com/built1n/wargames
 https://github.com/BlckChainDev/WarGames
 https://github.com/Gravy59/WOPR-Console
+- Switch design
+https://codepen.io/pluton/pen/DWwBpr
 
