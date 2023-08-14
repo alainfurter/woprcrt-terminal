@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react"
+import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { bestSpot, checkWin, checkTie } from "./minimax-algo"
@@ -66,12 +66,41 @@ const game_background = [
 const TicTacToe = () => {
     const navigate = useNavigate();
 
-    const [cells, setCells] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8])
-    const [go, setGo] = useState("circle")
-    const [winningMessage, setWinningMessage] = useState(null)
+    const [cells, _setCells] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8])
+    const cellsRef = useRef(cells);
 
-    const turn = go === 'circle' ? 'O' : 'X';
-    const message = "Current turn: '" + turn + "'"
+    const [go, _setGo] = useState("circle")
+    const goRef = useRef(go);
+
+    const [turn, _setTurn] = useState(null);
+    const turnRef = useRef(turn);
+
+
+    const [winningMessage, _setWinningMessage] = useState(null)
+    const winningMessageRef = useRef(winningMessage);
+
+    //const turn = go === 'circle' ? 'O' : 'X';
+    //const message = "Current turn: '" + turn + "'"
+
+    const setCells = data => {
+        cellsRef.current = data;
+        _setCells(data);
+      };
+
+    const setGo = data => {
+        goRef.current = data;
+        _setGo(data);
+      };
+
+    const setWinningMessage = data => {
+        winningMessageRef.current = data;
+        _setWinningMessage(data);
+      };
+
+    const setTurn = data => {
+        turnRef.current = data;
+        _setTurn(data);
+      };
 
     const getGo = (index) => {
         let currentGo = cells[index];
@@ -91,6 +120,7 @@ const TicTacToe = () => {
         squares.forEach((square) => {
             square.firstChild.innerHTML = '';
         })
+        setTurn(null);
         setWinningMessage(null); 
         setCells([0, 1, 2, 3, 4, 5, 6, 7, 8]);
         await fill_async(game_background, boardBackground);
@@ -103,13 +133,17 @@ const TicTacToe = () => {
 
         const eventhandler = (event) => {
             console.log('Keypress: ', event.key);
-            //event.preventDefault();
+            event.preventDefault();
+            let isnumber = event.key.match(/[1-9]/i);
             if (event.key === "Escape") {
                console.log('Source: ', event )
                window.removeEventListener("keydown", eventhandler);
               exitGame();           
             } else if (event.key === "Backspace") {
               resetGame();           
+            } else if (isnumber) {
+                console.log('Number between 1 and 9: ', event.key);
+                updateGame(Number(event.key - 1));
             }
          }
          window.addEventListener("keydown", eventhandler); 
@@ -125,6 +159,23 @@ const TicTacToe = () => {
         navigate("/");
     }
 
+    const updateGame = async (squarenumber) =>  {
+        console.log('updateGame: ', squarenumber);
+        if (winningMessageRef.current) return;
+        click();
+        const squares = document.querySelectorAll(".ttt-square");
+        console.log(squares);
+        const taken = squares[squarenumber].firstChild.classList.contains("circle") ||
+        squares[squarenumber].firstChild.classList.contains("cross");
+        console.log('Taken: ',taken);
+        if (!taken) {                
+                squares[squarenumber].firstChild.classList.add("circle")
+                await fill_async(letter_o, squares[squarenumber].firstChild);
+                handleCellChange("circle", squarenumber);
+                setGo("cross")
+        }
+    }
+
     const checkScore = () => {
         //console.log('Check Score');
         let human_player = checkWin(cells, 'O');
@@ -132,12 +183,15 @@ const TicTacToe = () => {
         let stalemate = checkTie(cells);
         //console.log('SM: ', stalemate, ' hp: ', human_player, ' wa: ', wopr_ai);
         if (stalemate) {
+            setTurn(null);
             setWinningMessage('STALEMATE. A STRANGE GAME...THE ONLY WINNING MOVE IS NOT TO PLAY.')
             say('A STRANGE GAME...THE ONLY WINNING MOVE IS NOT TO PLAY.');
         } else if (human_player) {
+            setTurn(null);
             setWinningMessage('YOU WON (O). CONGRATULATIONS!')
             say('YOU WON (O). CONGRATULATIONS!');
         } else if (wopr_ai) {
+            setTurn(null);
             setWinningMessage('I WON (X). DID YOU REALLY THINK YOU CAN WIN AGAINST A GAME COMPUTER?')
             say('I WON. DID YOU REALLY THINK YOU CAN WIN AGAINST A GAME COMPUTER?');
         }
@@ -145,7 +199,7 @@ const TicTacToe = () => {
 
     const handleClick = async (e) => {
         //console.log('Click event: ', e);
-        e.preventDefault();
+        //e.preventDefault();
         if (winningMessage || go === 'cross') return;
         click();
         //console.log('Target: ', e.target.className)
@@ -153,55 +207,54 @@ const TicTacToe = () => {
         //console.log('First child: ', e.target);
         const squares = document.querySelectorAll(".ttt-square");
         const taken = e.target.firstChild.classList.contains("circle") ||
-            e.target.firstChild.classList.contains("cross")
+            e.target.firstChild.classList.contains("cross");
         //console.log('Taken: ', taken);
         if (!taken) {
             if (go === "circle") {
-                //console.log('Paint user square: ', e.target.id);
-                //console.log(squares[e.target.id].firstChild);
                 e.target.firstChild.classList.add("circle")
                 await fill_async(letter_o, squares[e.target.id].firstChild);
                 handleCellChange("circle", e.target.id)
-                //const turns = document.querySelector("#turns");
-                //turns.innerHTML = '';
-                //await fill_async("It is WOPR's turn 'X'", turns);
                 setGo("cross")
             }
         }
     }
 
     const goWOPR = async () => {
+        console.log('go WOPR');
         const squares = document.querySelectorAll(".ttt-square");
         let bestMove = bestSpot(cells);
-        //console.log('WOPR move: ', bestMove)
-        await pause(2);
+        console.log('WOPR move: ', bestMove)
+        await pause(1);
         if (bestMove !== undefined) {
             squares[bestMove].firstChild.classList.add("cross")
             fill_async(letter_x, squares[bestMove].firstChild);
             handleCellChange("cross", bestMove);
-            const turns = document.querySelector("#turns");
-            //turns.innerHTML = '';
-            //await fill_async("It is your turn 'O'", turns);
             setGo('circle');
         }
     }
 
     const handleCellChange = (currentGo, id) => {
+        console.log('handleCellChange: ', currentGo, ': ', id);
         const player = currentGo === 'circle' ? 'O' : 'X';
-        const newCells = [...cells];
+        const newCells = [...cellsRef.current];
         newCells[id] = player;
         setCells(newCells)
     }
 
     useEffect(() => {
-        //console.log('Cells..');
-        checkScore()
+        console.log('Cells..');
+        checkScore();
     }, [cells])
 
     useEffect(() => {
-        //console.log('Go..');
+        console.log('Go..');
         //console.log(cells);
-        if (go === 'cross') goWOPR();
+        if (go === 'cross') {
+            setTurn("Current turn: 'X'");
+            goWOPR(); 
+        } else {
+            setTurn("Current turn: 'O'");
+        }
     }, [go])
 
     useEffect(() => {
@@ -211,34 +264,34 @@ const TicTacToe = () => {
       return (
         <div id="tic-tac-toe-container">
             <div id="tic-tac-toe">
-            <h1>TIC TAC TOE</h1>
-            <br></br>
-            <div id="ttt-board-container">
-                <div id="ttt-board-wrapper">
-                    <div id="ttt-board-background"></div>
-                    <div id="ttt-board">
-                        {cells.map((cell, index) =>
-                            <Cell
-                                key={index}
-                                id={index}
-                                cell={cell}
-                                go={getGo(index)}
-                                winningMessage={winningMessage}
-                                handleClick={handleClick}
-                            />)}
+                <h1>TIC TAC TOE</h1>
+                <br></br>
+                <div id="ttt-board-container">
+                    <div id="ttt-board-wrapper">
+                        <div id="ttt-board-background"></div>
+                        <div id="ttt-board">
+                            {cells.map((cell, index) =>
+                                <Cell
+                                    key={index}
+                                    id={index}
+                                    cell={cell}
+                                    go={getGo(index)}
+                                    winningMessage={winningMessage}
+                                    handleClick={handleClick}
+                                />)}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br></br>
-            <div id="turns">
-                {winningMessage || message}
-            </div>
-            <div className='game-buttons'>
-                <button onClick={resetGame}>{"RESET (BACKSPACE)"}</button>
-                <button onClick={exitGame}>{"EXIT (ESC)"}</button>
+                <br></br>
+                <div id="turns">
+                    {winningMessage || turn}
+                </div>
+                <div className='ttt-game-buttons'>
+                    <button onClick={resetGame}>{"RESET (BACKSPACE)"}</button>
+                    <button onClick={exitGame}>{"EXIT (ESC)"}</button>
+                </div> 
             </div> 
-        </div> 
-    </div>)
+        </div>)
 }
 
 export default TicTacToe;

@@ -12,6 +12,7 @@ import TicTacToe from '../games/tic-tac-toe/TicTacToe';
 import Hangman from '../games/hangman/Hangman';
 import Sudoku from '../games/sudoku/Sudoku';
 import GTW from '../games/gtw/GTW';
+import Pacman from '../games/pacman/Pacman';
 
 const Monitor = ({on, reset}) => {
 
@@ -63,7 +64,11 @@ const Monitor = ({on, reset}) => {
                                 <Route 
                                     path='/global-thermonuclear-war/*' 
                                     element={<GTW />}>
-                                </Route>                   
+                                </Route>
+                                <Route 
+                                    path='/pacman/*' 
+                                    element={<Pacman />}>
+                                </Route>                     
                             </Routes>
                             {/* <Terminal /> */}
                         </div>
