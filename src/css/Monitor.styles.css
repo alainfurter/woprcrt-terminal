@@ -1,10 +1,16 @@
 #monitor {
   /* position: relative; */
   z-index: 20;
-  min-width: 880px;
+
+  width: 880px;
   height: 700px;
+  min-height: 700px;
+
+  /* min-width: 880px;
+  min-height: 100%;
   max-width: 1280px;
-  max-height: 1024px;
+  max-height: 1024px; */
+
   user-select: none;
   /* font-size: var(--font-size); */
   transform: translate3d(0, 0, 0);
