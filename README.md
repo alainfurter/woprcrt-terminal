@@ -5,7 +5,8 @@ USE GOOGLE CHROME AND TURN UP THE SOUND VOLUME FOR THE BEST EXPERIENCE!!!
 The aim was to develop a game hub for playing Tic Tac Toe, Hangman and Sudoku. Whenver I think about Tic Tac Toe I remember the movie "War Games" that was released in 1983 when I was a you boy becoming a computer and tech enthusiast. All three games are design wise and grafically very simple. 
 The end result is an interactive old CRT style terminal where the user can play games, execute commands and ask questions which are either answered with pre-defined sentences or with answers from Chat GPT. The interaction is supported with old CRT monitor style animations, sounds and a synthezied computer voice.
 
-<video src="/public/assets/screenshots/example.m4v" width=350 />
+![Terminal example](https://github.com/alainfurter/woprcrt-terminal/assets/3966775/a1d0bbb3-d03b-400d-961c-11209d2327c7)
+
 
 ## Design Ideas and Flow of User Interactions
 
