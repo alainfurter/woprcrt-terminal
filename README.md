@@ -5,22 +5,28 @@ USE GOOGLE CHROME AND TURN UP THE SOUND VOLUME FOR THE BEST EXPERIENCE!!!
 The aim was to develop a game hub for playing Tic Tac Toe, Hangman and Sudoku. Whenver I think about Tic Tac Toe I remember the movie "War Games" that was released in 1983 when I was a you boy becoming a computer and tech enthusiast. All three games are design wise and grafically very simple. 
 The end result is an interactive old CRT style terminal where the user can play games, execute commands and ask questions which are either answered with pre-defined sentences or with answers from Chat GPT. The interaction is supported with old CRT monitor style animations, sounds and a synthezied computer voice.
 
+<video src="/public/assets/screenshots/example.m4v" width=350 />
+
 ## Design Ideas and Flow of User Interactions
 
 War Games Movie:
 In the movie WOPR (Joshua) is a game computer developed by Prof. Falken and named after his son Joshua. The uniqueness of this game computer was that it could learn from its own mistake. WOPR was then used by the military to simulate scenarios for World War III. 
 In the movie a young college student, David, hacks into WOPR using an old login (backdoor) left by Falken. Not knowing that WOPR is now part of the norad military defence program, he starts the game "Global Thermonuclear War". The game computer simulates World War III on the real systems of Norad and with real nuclear war heads it is connected to. He manages to stop WOPR when he plays Tic Tac Toe against himself learning that the game does no make any sense as there are no winners. And the only winning move is not to play because winning is the game computers primary goal. When he learns that Tic Tac Toe does not make any sense he tries every scenario of the Global Nuclear War simulation coming to the same conlusion and stops playing. The movie ends. Peace.
 
-<p float="left">
-    <img src="/public/assets/screenshots/wg1.jpg" alt="War Games" width:100px />
-    <img src="/public/assets/screenshots/wg2.jpg" alt="War Games" width:100px />
-    <img src="/public/assets/screenshots/home.png" alt="War Games" width:100px />
-</p>
-<p float="left">
-    <img src="/public/assets/screenshots/imsai.jpg" alt="War Games" width:100px />
-    <img src="/public/assets/screenshots/ttt.jpg" alt="War Games" width:100px />
-    <img src="/public/assets/screenshots/hello.png" alt="War Games" width:100px />
-</p>
+<table>
+  <tr>
+    <td><img src="/public/assets/screenshots/wg1.jpg" alt="War Games" width:350 height=280 /></td>
+    <td><img src="/public/assets/screenshots/wg2.jpg" alt="War Games" width:350 height=280 /></td>
+  </tr>
+   <tr>
+    <td><img src="/public/assets/screenshots/home.png" alt="War Games" width:300 height=250 /></td>
+     <td><img src="/public/assets/screenshots/imsai.jpg" alt="War Games" width:300 height=250 /></td>
+  </tr>
+  <tr>
+    <td><img src="/public/assets/screenshots/ttt.jpg" alt="War Games" width:300 height=250 /></td>
+     <td><img src="/public/assets/screenshots/hello.png" alt="War Games" width:300 height=250 /></td>
+  </tr>
+ </table>
 
 Remembering this with a touch of nostalgia, I decided to develop an old CRT style terminal similar to the one David had at his home when he connects to WOPR and interacts with it. He used an IMSAI 8080. So the monitor and cpu base were designed accordingly. In the movie WOPR speaks with a synthezized voice, I wanted to have the player of my terminal to have a similar experience. I used the Voice 'Zarvox' with a lower pitch that is present on Google Chrome and Safari as a synthetic voice out of around 140 voices. The terminal had to have some old CRT screen effects like scanlines, blue / back color text and background with blurred letters and some skew animation that distorts the screen frequently. When the user types the letters should show up with a delay one by one simulating the low processing power at the time. The retro sounds of the keyboard click also adds to the old CRT experience.
 
