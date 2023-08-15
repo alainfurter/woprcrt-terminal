@@ -24,13 +24,19 @@ const selectgame = async () => {
   });
   if (game === "1") {
     console.log("TIC-TAC-TOE");
-    await alert("The TIC-TAC-TOE game is not implemented yet");
+    //await alert("The TIC-TAC-TOE game is not implemented yet");
+    const event = new CustomEvent("loadgame", { detail: "tic-tac-toe" });
+    window.dispatchEvent(event);
   } else if (game === "2") {
     console.log("HANGMAN");
-    await alert("The HANGMAN game is not implemented yet");
+    //await alert("The HANGMAN game is not implemented yet");
+    const event = new CustomEvent("loadgame", { detail: "hangman" });
+    window.dispatchEvent(event);
   } else if (game === "3") {
     console.log("SUDOKU");
-    await alert("The SUDOKU game is not implemented yet");
+    //await alert("The SUDOKU game is not implemented yet");
+    const event = new CustomEvent("loadgame", { detail: "sudoku" });
+    window.dispatchEvent(event);
   } else if (game === "4") {
     console.log("GLOBAL THERMONUCLEAR WAR");
     //await alert("The GLOBAL THERMONUCLEAR WAR game is not implemented yet");

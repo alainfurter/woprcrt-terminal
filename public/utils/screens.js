@@ -258,7 +258,14 @@ async function games() {
     await type(["TYPE 'HELP' FOR A LIST OF AVAILABLE COMMANDS.", " "]);
     return main();
   } else {
-    await type([" ", "TYPE 'HELP' FOR A LIST OF AVAILABLE COMMANDS.", " "]);
+    await type([
+      " ",
+      "1. TYPE 'HELP' FOR A LIST OF AVAILABLE COMMANDS. OR",
+      "2. TYPE 'GAMES' FOR A LIST OF AVAILABLE GAMES. OR",
+      "3. ASK ME A QUESTION.",
+      " ",
+      " ",
+    ]);
     return main();
   }
 }
@@ -281,7 +288,9 @@ async function main_with_info() {
       "🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫",
       " ",
       " ",
-      "TYPE 'HELP' FOR A LIST OF AVAILABLE COMMANDS.",
+      "1. TYPE 'HELP' FOR A LIST OF AVAILABLE COMMANDS.",
+      "2. TYPE 'GAMES' FOR A LIST OF AVAILABLE GAMES. OR",
+      "3. ASK ME A QUESTION.",
       " ",
       " ",
     ],

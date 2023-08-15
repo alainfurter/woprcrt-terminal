@@ -196,7 +196,7 @@ const processInput = async (inputString) => {
   //console.log("Answer: ", answer);
   if (answer.length === 0) {
     if (numberofquestions <= maxnumberofquestions) {
-      await type("LET ME THINK FOR A FEW SECONDS.", { speak: true });
+      await type("LET ME RESEARCH FOR A FEW SECONDS.", { speak: true });
       await chatgptCompletion(inputString);
       numberofquestions++;
     } else {
