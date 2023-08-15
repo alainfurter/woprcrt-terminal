@@ -11,13 +11,16 @@ War Games Movie:
 In the movie WOPR (Joshua) is a game computer developed by Prof. Falken and named after his son Joshua. The uniqueness of this game computer was that it could learn from its own mistake. WOPR was then used by the military to simulate scenarios for World War III. 
 In the movie a young college student, David, hacks into WOPR using an old login (backdoor) left by Falken. Not knowing that WOPR is now part of the norad military defence program, he starts the game "Global Thermonuclear War". The game computer simulates World War III on the real systems of Norad and with real nuclear war heads it is connected to. He manages to stop WOPR when he plays Tic Tac Toe against himself learning that the game does no make any sense as there are no winners. And the only winning move is not to play because winning is the game computers primary goal. When he learns that Tic Tac Toe does not make any sense he tries every scenario of the Global Nuclear War simulation coming to the same conlusion and stops playing. The movie ends. Peace.
 
-<img src="/public/assets/screenshots/wg1.jpg" alt="War Games" width:200px />
-<img src="/public/assets/screenshots/wg2.jpg" alt="War Games" width:200px />
-<img src="/public/assets/screenshots/home.png" alt="War Games" width:200px />
-<img src="/public/assets/screenshots/imsai.jpg" alt="War Games" width:200px />
-<img src="/public/assets/screenshots/ttt.jpg" alt="War Games" width:200px />
-<img src="/public/assets/screenshots/hello.png" alt="War Games" width:200px />
-
+<p float="left">
+    <img src="/public/assets/screenshots/wg1.jpg" alt="War Games" width:100px />
+    <img src="/public/assets/screenshots/wg2.jpg" alt="War Games" width:100px />
+    <img src="/public/assets/screenshots/home.png" alt="War Games" width:100px />
+</p>
+<p float="left">
+    <img src="/public/assets/screenshots/imsai.jpg" alt="War Games" width:100px />
+    <img src="/public/assets/screenshots/ttt.jpg" alt="War Games" width:100px />
+    <img src="/public/assets/screenshots/hello.png" alt="War Games" width:100px />
+</p>
 
 Remembering this with a touch of nostalgia, I decided to develop an old CRT style terminal similar to the one David had at his home when he connects to WOPR and interacts with it. He used an IMSAI 8080. So the monitor and cpu base were designed accordingly. In the movie WOPR speaks with a synthezized voice, I wanted to have the player of my terminal to have a similar experience. I used the Voice 'Zarvox' with a lower pitch that is present on Google Chrome and Safari as a synthetic voice out of around 140 voices. The terminal had to have some old CRT screen effects like scanlines, blue / back color text and background with blurred letters and some skew animation that distorts the screen frequently. When the user types the letters should show up with a delay one by one simulating the low processing power at the time. The retro sounds of the keyboard click also adds to the old CRT experience.
 
@@ -69,10 +72,14 @@ Sudoku: the game has an integrated solver which shows the solution if required.
 Hangman: just like any other version
 Global Thermonuclear War: is not really a game, integrated just for fun. The US always looses.
 
-<img src="/public/assets/screenshots/tictactoe.png" alt="Tic Tac Toe" width:200px />
-<img src="/public/assets/screenshots/hangman.png" alt="Hangman" width:200px />
-<img src="/public/assets/screenshots/sudoku.png" alt="Sudoku" width:200px />
-<img src="/public/assets/screenshots/gtw.png" alt="Global Thermonuclear War" width:200px />
+<p float="left">
+    <img src="/public/assets/screenshots/tictactoe.png" alt="Tic Tac Toe" width:200px />
+    <img src="/public/assets/screenshots/hangman.png" alt="Hangman" width:200px />
+</p>
+<p float="left">
+    <img src="/public/assets/screenshots/sudoku.png" alt="Sudoku" width:200px />
+    <img src="/public/assets/screenshots/gtw.png" alt="Global Thermonuclear War" width:200px />
+</p>
 
 ## Getting Started
 
