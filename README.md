@@ -114,7 +114,7 @@ While developing this web app I did a lot of research and the following publicat
 
 ## Authors
 
-* **Alain Furter** - [Alain Furter](https://github.com/alainfurter)
+* [Alain Furter](https://github.com/alainfurter)
 
 ## License
 
