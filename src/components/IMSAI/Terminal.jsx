@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import '../../css/Terminal.styles.css'
 import '../../js/terminal.js'
@@ -7,23 +7,52 @@ import { loadingTerminal } from '../../js/terminal.js';
 
 // import { memo } from 'react';
 
-const Terminal = ({ reset }) => {
+const Terminal = ({ reset, on }) => {
 
-    // const loadingTerminal = useCallback(() => {
-    //     console.log('Terminal loading...');
-    //     console.log(logon);
-    //     onload(logon, callBack);
-    // }, []);
+    const ref = useRef(true);
+    const loadTerminalOn = useRef(false);
+    const loadTerminalReset = useRef(false);
 
     useEffect(() => {
-        console.log('Terminal resetting..');
-        loadingTerminal();
+        console.log('Main use effect');
+        const firstRender = ref.current;
+        console.log('Ref: ', ref.current);
+        if (firstRender) {
+          ref.current = false;
+          console.log('First Render');
+          console.log('Terminal loading, main...');
+          loadingTerminal();
+        } else {
+          console.log('Not a first Render');
+          loadTerminalOn.current = true;
+          loadTerminalReset.current = true;
+        }
+      })
+    
+    useEffect(() => {
+        console.log('Terminal on, off: ', on);
+        console.log('Ref: ', ref.current);
+        if (on==='on') {
+            if (loadTerminalOn.current) {
+                console.log('On, loading terminal: ', loadTerminalOn.current);
+                loadingTerminal();
+            }
+        } else {
+            const event = new CustomEvent("stopwoprsound");
+            window.dispatchEvent(event);
+        }
+    }, [on]);
+
+    useEffect(() => {
+        console.log('Terminal resetting...');
+        console.log('Ref: ', ref.current);
+        const event = new CustomEvent("stopwoprsound");
+        window.dispatchEvent(event);
+        if (loadTerminalReset.current) { 
+            console.log('Reset, loading terminal: ', loadTerminalReset.current);
+            loadingTerminal();
+        }
     }, [reset]);
-
-    useEffect(() => {
-        console.log('Terminal loading...');
-        loadingTerminal();
-    }, []);
 
     return (
         <div id="terminal-container" >

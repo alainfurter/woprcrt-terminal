@@ -63,6 +63,8 @@ const game_background = [
     '             |             |             ',   
 ];
   
+let eventHandler = null;
+
 const TicTacToe = () => {
     const navigate = useNavigate();
 
@@ -131,8 +133,8 @@ const TicTacToe = () => {
             await fill_async("Current turn: 'O'", turns);
         }
 
-        const eventhandler = (event) => {
-            console.log('Keypress: ', event.key);
+        eventHandler = (event) => {
+            console.log('Keypress TTT I: ', event.key);
             event.preventDefault();
             let isnumber = event.key.match(/[1-9]/i);
             if (event.key === "Escape") {
@@ -146,7 +148,7 @@ const TicTacToe = () => {
                 updateGame(Number(event.key - 1));
             }
          }
-         window.addEventListener("keydown", eventhandler); 
+         window.addEventListener("keydown", eventHandler); 
     }
 
     const resetGame = () => {
@@ -156,6 +158,7 @@ const TicTacToe = () => {
 
     const exitGame = () => {
         button();
+        window.removeEventListener("keydown", eventHandler);
         navigate("/");
     }
 

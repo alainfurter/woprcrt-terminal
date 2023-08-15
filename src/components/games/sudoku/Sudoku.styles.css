@@ -184,7 +184,7 @@
   100% { opacity: 100% !important; }
 }
 
-.game-buttons {
+.sudoku-game-buttons {
   margin-top: 10px;
   width: 100%;
   display: flex;

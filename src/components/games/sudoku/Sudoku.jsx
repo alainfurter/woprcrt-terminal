@@ -115,7 +115,7 @@ const Sudoku = () => {
 
         eventHandler = (event) => {
             event.preventDefault();
-            console.log('Keypress: ', event.key);
+            console.log('Keypress sudoku I: ', event.key);
             let isnumber = event.key.match(/[1-9]/i);
             if (event.key === "Escape") {
               console.log('Source: ', event )
@@ -320,7 +320,7 @@ const Sudoku = () => {
             <div id="winningMessage">
                 {winningMessage}
             </div>
-            <div className='game-buttons'>
+            <div className='sudoku-game-buttons'>
                 <button onClick={resetGame}>{"RESET (BACKSPACE)"}</button>
                 <button className="small" onClick={solveGame}>{"SOLVE (S)"}</button>
                 <button className="small" onClick={checkGame} disabled={!allFilled}>{"CHECK (C)"}</button>

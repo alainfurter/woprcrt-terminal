@@ -5,17 +5,17 @@ import alert from "/utils/alert.js";
 import say from "/utils/speak.js";
 import selectgame, { output } from "/commands/games.js";
 
-var woprsound = new Audio("/assets/sounds/wopr-humming.mp3");
-woprsound.loop = true;
-woprsound.addEventListener(
-  "stopwoprsound",
-  (event) => {
-    event.preventDefault();
-    woprsound.pause();
-    woprsound.remove();
-  },
-  false
-);
+// var woprsound = new Audio("/assets/sounds/wopr-humming.mp3");
+// woprsound.loop = true;
+// woprsound.addEventListener(
+//   "stopwoprsound",
+//   (event) => {
+//     event.preventDefault();
+//     woprsound.pause();
+//     woprsound.remove();
+//   },
+//   false
+// );
 
 /** Login screen */
 async function login() {
@@ -25,7 +25,9 @@ async function login() {
   localStorage.setItem("screenStatus", "login");
 
   console.log("Play wopr sound");
-  woprsound.play();
+  //woprsound.play();
+  const event = new CustomEvent("playwoprsound");
+  window.dispatchEvent(event);
   await type(
     [
       " ",
@@ -246,7 +248,9 @@ async function games() {
   localStorage.setItem("screenStatus", "games");
 
   console.log("Play wopr sound");
-  woprsound.play();
+  //woprsound.play();
+  const event = new CustomEvent("playwoprsound");
+  window.dispatchEvent(event);
   // SyntaxError();
   await type(["GREETINGS PROFESSOR FURTER.", " "], { speak: true });
   say("SHALL WE PLAY A GAME?");
@@ -275,7 +279,9 @@ async function main_with_info() {
   localStorage.setItem("screenStatus", "main");
 
   console.log("Play wopr sound");
-  woprsound.play();
+  //woprsound.play();
+  const event = new CustomEvent("playwoprsound");
+  window.dispatchEvent(event);
   await type(
     [
       " ",
@@ -310,7 +316,9 @@ async function main_with_info() {
 async function main() {
   localStorage.setItem("screenStatus", "main");
   console.log("Play wopr sound");
-  woprsound.play();
+  //woprsound.play();
+  const event = new CustomEvent("playwoprsound");
+  window.dispatchEvent(event);
 
   // type(" ", { wait: 0, initialWait: 0, finalWait: 0, stopBlinking: true });
   let command = await input();
@@ -394,7 +402,7 @@ export {
   main_with_info,
   games,
   dialer,
-  woprsound,
+  // woprsound,
   getScreen,
   toggleFullscreen,
   div,

@@ -54,7 +54,6 @@ https://youtu.be/q14OTYVKMWc
         'HELP': showhs the available list of commands
         'LOGOUT': logs the user out and returns to the login screen
         'MATRIX': answer with a matrix move like statement
-        'QUIT': WOPR says goodbye and the computer turns off
     4.2 Typing in 3 or more words. When the user types in 3 or more words a special command is loaded and given the word list as parameter (__sentences). This module interprets the user input as a sentence, question. 
         First it tries to match the words with a list of pre-defined questions and if succefull shows the answer. F.e. when the user types a sentence containing the words 'JOE' and 'BIDEN', the module finds a corresponding entry and shows the predefined answer.
         If there is no match in the list, the module connects to the Chat GPT API and asks Chat GPI for an answer. If successful, the answer is shown to the user and spoken out by the synthezied voice. This results in an interative conversation between WOPR and the user which is quite impressive. 

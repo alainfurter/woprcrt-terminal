@@ -1,7 +1,7 @@
 const output = [
   " ",
   "Available commands:",
-  "help, games, matrix, clear, logout, quit",
+  "help, games, matrix, clear, logout",
   " ",
 ];
 

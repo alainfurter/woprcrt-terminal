@@ -170,7 +170,7 @@ const Hangman = () => {
 
       eventHandler = (event) => {
          //event.preventDefault();
-         console.log('Keypress: ', event.key);
+         console.log('Keypress hangman: ', event.key);
          if (event.key === "Escape") {
             console.log('Source: ', event )
             window.removeEventListener("keydown", eventHandler);
@@ -222,7 +222,7 @@ const Hangman = () => {
          letters_input.value = '';
          return; // Game has ended
       } 
-      console.log('Keypress: ', letters_input.value);
+      console.log('Keypress hangman on input: ', letters_input.value);
       const lowerCaseLetter = letters_input.value.toLowerCase();
       let isLetter = lowerCaseLetter .length === 1 && lowerCaseLetter .match(/[a-z]/i);
       if (!isLetter) {
@@ -347,7 +347,7 @@ const Hangman = () => {
             <div id="winningMessage">
                {winningMessage}
             </div>
-            <div className='game-buttons'>
+            <div className='hangman-game-buttons'>
                <button onClick={resetGame}>{"RESET (BACKSPACE)"}</button>
                <button onClick={exitGame}>{"EXIT (ESC)"}</button>
             </div> 

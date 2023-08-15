@@ -175,7 +175,7 @@ input[type=text] {
   -moz-appearance: textfield;
 }
 
-.game-buttons {
+.hangman-game-buttons {
     margin-top: 10px;
     width: 100%;
     display: flex;

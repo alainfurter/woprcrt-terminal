@@ -1,3 +1,16 @@
+var woprsound = new Audio("/assets/sounds/wopr-humming.mp3");
+
+window.addEventListener("playwoprsound", (event) => {
+  console.log("Terminal event listener playwoprsound: ", event);
+  woprsound.loop = true;
+  woprsound.play();
+});
+
+window.addEventListener("stopwoprsound", (event) => {
+  console.log("Terminal event listener stopwoprsound: ", event);
+  woprsound.pause();
+});
+
 async function dialer() {
   const module = await import(
     `${import.meta.env.BASE_URL}utils/screens.js` /* @vite-ignore */
@@ -65,6 +78,8 @@ async function parse(...args) {
 async function loadingTerminal() {
   const screenStatus = localStorage.getItem("screenStatus");
   console.log("loadingTerminal. screenStatus: ", screenStatus);
+  let screen = document.querySelector(".terminal");
+  screen.innerHTML = "";
   if (screenStatus === "dialer") {
     dialer();
   } else if (screenStatus === "login") {

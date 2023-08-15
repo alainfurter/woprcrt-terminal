@@ -47,7 +47,7 @@ const Monitor = ({on, reset}) => {
                             <Routes>
                                 <Route 
                                     index
-                                    element={<Terminal reset={reset}/>}>
+                                    element={<Terminal reset={reset} on={on} />}>
                                 </Route>
                                 <Route 
                                     path='/tic-tac-toe/*' 

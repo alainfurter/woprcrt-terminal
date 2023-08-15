@@ -1,6 +1,5 @@
 import { type } from "/utils/io.js";
 import say, { stopSpeaking } from "/utils/speak.js";
-import { woprsound } from "/utils/screens.js";
 
 const output = [" ", "GOODBYE PROFESSOR FURTER.", " "];
 
@@ -12,13 +11,13 @@ function togglePower() {
     document
       .getElementById("screen-on-off-container")
       .classList.toggle("on", true);
-    document
-      .getElementById("screen-on-off-container")
-      .classList.toggle("off", false);
+    // document
+    //   .getElementById("screen-on-off-container")
+    //   .classList.toggle("off", false);
   } else {
-    document
-      .getElementById("screen-on-off-container")
-      .classList.toggle("on", false);
+    // document
+    //   .getElementById("screen-on-off-container")
+    //   .classList.toggle("on", false);
     document
       .getElementById("screen-on-off-container")
       .classList.toggle("off", true);
@@ -33,8 +32,8 @@ export default () => {
   say("GOODBYE");
   //processOutput();
   stopSpeaking();
-  const event = new Event("stopwoprsound");
-  woprsound.dispatchEvent(event);
+  const event = new CustomEvent("stopwoprsound");
+  window.dispatchEvent(event);
   return togglePower();
 };
 

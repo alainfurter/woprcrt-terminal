@@ -7,6 +7,8 @@ import { button, click } from '/src/js/game-sounds.js'
 
 import './Pacman.styles.css'
 
+let eventHandler = null;
+
 const Pacman = () => {
     const navigate = useNavigate();
 
@@ -15,17 +17,17 @@ const Pacman = () => {
     const process_output = async () => {
         setWinningMessage(null); 
        
-        const eventhandler = (event) => {
-            console.log('Keypress: ', event.key);
+        eventHandler = (event) => {
+            console.log('Keypress pacman: ', event.key);
             if (event.key === "Escape") {
                //console.log('Source: ', event )
-               window.removeEventListener("keydown", eventhandler);
+               window.removeEventListener("keydown", eventHandler);
               exitGame();           
             } else if (event.key === "Backspace") {
               resetGame();           
             }
          }
-         window.addEventListener("keydown", eventhandler); 
+         window.addEventListener("keydown", eventHandler); 
     }
 
     const resetGame = () => {
@@ -35,6 +37,7 @@ const Pacman = () => {
 
     const exitGame = () => {
         button();
+        window.removeEventListener("keydown", eventHandler);
         navigate("/");
     }
 

@@ -219,6 +219,7 @@ const GTW = () => {
     }
 
     const exitGame = () => {
+        console.log('Exit game');
         blip();
         window.removeEventListener("keydown", eventHandler);
         navigate("/");
@@ -254,7 +255,7 @@ const GTW = () => {
                 <input type="text" name="country-choice" id="country-choice" maxLength="1" onChange={()=>onInputChange()} />
                 <br></br>
                 <p id='war-hero'></p>
-                <div className='game-buttons'>
+                <div className='gtw-game-buttons'>
                     <button onClick={process_output}>{"RESET (BACKSPACE)"}</button>
                     <button onClick={exitGame}>{"EXIT (ESC)"}</button>
                 </div>
