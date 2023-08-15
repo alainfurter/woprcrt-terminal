@@ -13,6 +13,10 @@ In the movie a young college student, David, hacks into WOPR using an old login 
 
 <img src="/public/assets/screenshots/wg1.jpg" alt="War Games" width:200px />
 <img src="/public/assets/screenshots/wg2.jpg" alt="War Games" width:200px />
+<img src="/public/assets/screenshots/home.png" alt="War Games" width:200px />
+<img src="/public/assets/screenshots/imsai.jpg" alt="War Games" width:200px />
+<img src="/public/assets/screenshots/ttt.jpg" alt="War Games" width:200px />
+<img src="/public/assets/screenshots/hello.png" alt="War Games" width:200px />
 
 
 Remembering this with a touch of nostalgia, I decided to develop an old CRT style terminal similar to the one David had at his home when he connects to WOPR and interacts with it. He used an IMSAI 8080. So the monitor and cpu base were designed accordingly. In the movie WOPR speaks with a synthezized voice, I wanted to have the player of my terminal to have a similar experience. I used the Voice 'Zarvox' with a lower pitch that is present on Google Chrome and Safari as a synthetic voice out of around 140 voices. The terminal had to have some old CRT screen effects like scanlines, blue / back color text and background with blurred letters and some skew animation that distorts the screen frequently. When the user types the letters should show up with a delay one by one simulating the low processing power at the time. The retro sounds of the keyboard click also adds to the old CRT experience.
